@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/torre")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class TorreController {
 
     @Autowired
