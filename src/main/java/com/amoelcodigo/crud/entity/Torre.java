@@ -2,11 +2,15 @@ package com.amoelcodigo.crud.entity;
 
 import javax.persistence.*;
 
+//Notación para indicar que es una entidad
 @Entity
+//Tabla que corresponde a esta entidad
 @Table(name = "torre")
 public class Torre {
 
+    //Llave primaria de la tabla
     @Id
+    //Se le indica que el campo ID es Autonumerico
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idTorre;
     private String nombreTorre;
@@ -15,6 +19,9 @@ public class Torre {
     public Torre() {
     }
 
+    /*
+    Constructor con parametros
+     */
     public Torre(String nombreTorre, int cantidadAptos) {
         this.nombreTorre = nombreTorre;
         this.cantidadAptos = cantidadAptos;

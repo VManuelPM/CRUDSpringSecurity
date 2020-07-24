@@ -8,18 +8,28 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//Notación para indicar que es un controlador de tipo Rest
 @RestController
+//Notación para indicar el contexto de nuestros endpoint es decir /torre/nombreServicio
 @RequestMapping("/torre")
+//URL que permitimos que consuman nuestras APIS
+//En caso de querer permitir todos los origentes ponemos en lugar de la URL un *
 @CrossOrigin(origins = "http://localhost:4200")
 public class TorreController {
 
+    /*El nombre de las torres es unico,
+    en la creación y actualizacón se hace la validación*/
+
+    //Inyección de dependencias
     @Autowired
     TorreService torreService;
 
+    //Se le indica el tipo de petición asi como el nombre del servicio
     @GetMapping("/listaTorre")
     public ResponseEntity<List<Torre>> listaTorres(){
 
@@ -51,6 +61,7 @@ public class TorreController {
     //El body va a ser un JSON
     //Aqui se usa el apache commons lang
     // El import de StringUtils es import org.apache.commons.lang3.StringUtils;
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/crearTorre")
     public ResponseEntity<?> creaTorre(@RequestBody TorreDto torreDto){
 
@@ -68,6 +79,7 @@ public class TorreController {
         return new ResponseEntity(new Mensaje("Torre creada"), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/actualizarTorre/{idTorre}")
     public ResponseEntity<?> actualizarTorre(@PathVariable("idTorre") int idTorre, @RequestBody TorreDto torreDto){
 
@@ -91,6 +103,7 @@ public class TorreController {
         return new ResponseEntity(new Mensaje("Torre actualizada"), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/borrarTorre/{idTorre}")
     public ResponseEntity<?> borrarTorre(@PathVariable("idTorre") int idTorre){
         if (!torreService.existsByIdTorre(idTorre))
