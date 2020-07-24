@@ -12,14 +12,23 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//Notación para indicar que es un controlador de tipo Rest
 @RestController
+//Notación para indicar el contexto de nuestros endpoint es decir /torre/nombreServicio
 @RequestMapping("/torre")
+//URL que permitimos que consuman nuestras APIS
+//En caso de querer permitir todos los origentes ponemos en lugar de la URL un *
 @CrossOrigin(origins = "http://localhost:4200")
 public class TorreController {
 
+    /*El nombre de las torres es unico,
+    en la creación y actualizacón se hace la validación*/
+
+    //Inyección de dependencias
     @Autowired
     TorreService torreService;
 
+    //Se le indica el tipo de petición asi como el nombre del servicio
     @GetMapping("/listaTorre")
     public ResponseEntity<List<Torre>> listaTorres(){
 

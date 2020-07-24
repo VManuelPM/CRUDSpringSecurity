@@ -10,10 +10,14 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+//Notación para indicar que es un servicio
 @Service
+//Asegura que toda la data requerida este segura hasta que la transacción termine
+//Recomiendo leer acerca de esta notación (es un mundo completo jeje) 
 @Transactional
 public class TorreService {
 
+    //Inyección de dependecias (crea una instancia cuando lo requiera)
     @Autowired
     TorreRepository torreRepository;
 
@@ -45,6 +49,5 @@ public class TorreService {
     public boolean existsByNombreTorre(String nombreTorre){
         return torreRepository.existsByNombreTorre(nombreTorre);
     }
-
 
 }

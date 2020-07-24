@@ -5,8 +5,10 @@ import javax.validation.constraints.NotBlank;
 
 public class TorreDto {
 
+    //Notación para especificar que el campo no puede venir vacio
     @NotBlank
     private String nombreTorre;
+    //Notación para indicar que el tamaño minimo debe ser 0
     @Min(0)
     private int cantidadAptos;
 
